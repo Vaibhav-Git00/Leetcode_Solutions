@@ -1,0 +1,27 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        long A =Long.parseLong(a);
+        long B =Long.parseLong(b);
+        long sum1=0,sum2=0,sum3=0,res,power1=1,power2=1,power3=1;
+        while(A>0||B>0){
+            long ls=A%10;
+            sum1=sum1+(ls*power1);
+            power1*=2;
+            A/=10;
+
+
+            long lss=B%10;
+            sum2=sum2+(lss*power2);
+            power2*=2;
+            B/=10;
+        }
+        res=sum1+sum2;
+        while(res>0){
+            long lss=res%2;
+            sum3=sum3+(lss*power3);
+            power3*=10;
+            res/=2;
+        }
+        return Long.toString(sum3);
+    }
+}
