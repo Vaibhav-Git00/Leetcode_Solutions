@@ -1,0 +1,48 @@
+// import java.util.ArrayList;
+// import java.util.List;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] arr) {
+        List<Integer> result = new ArrayList<>();
+        if (arr == null || arr.length == 0) {
+            return result;
+        }
+
+        int startRow = 0;
+        int endRow = arr.length - 1;
+        int startCol = 0;
+        int endCol = arr[0].length - 1;
+
+        while (startRow <= endRow && startCol <= endCol) {
+            // Top
+            for (int j = startCol; j <= endCol; j++) {
+                result.add(arr[startRow][j]);
+            }
+            startRow++;
+
+            // right
+            for (int i = startRow; i <= endRow; i++) {
+                result.add(arr[i][endCol]);
+            }
+            endCol--;
+
+            // bottom
+            if (startRow <= endRow) {
+                for (int j = endCol; j >= startCol; j--) {
+                    result.add(arr[endRow][j]);
+                }
+                endRow--;
+            }
+
+            // left
+            if (startCol <= endCol) {
+                for (int i = endRow; i >= startRow; i--) {
+                    result.add(arr[i][startCol]);
+                }
+                startCol++;
+            }
+        }
+
+        return result;
+    }
+}
