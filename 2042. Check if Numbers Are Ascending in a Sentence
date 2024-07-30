@@ -1,0 +1,15 @@
+public class Solution {
+    public boolean areNumbersAscending(String s) {
+        String num= s.replaceAll("([a-z])"," ").replaceAll("( )+"," ").trim();
+        String str[]=num.split(" ");
+        ArrayList<Integer>arr= new ArrayList<>();
+        for(int i=0;i<str.length;i++){
+            arr.add(Integer.parseInt(str[i]));
+        }
+        for(int i=0;i<arr.size()-1;i++){
+            if(arr.get(i)>=arr.get(i+1))
+            return false;
+        }
+        return true;
+    }
+}
