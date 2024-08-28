@@ -1,0 +1,19 @@
+class Solution {
+    public long countVowels(String word) {
+        long n=word.length();
+        long sum=0;
+        Set<Character> vowel=new HashSet<>();
+        vowel.add('a');
+        vowel.add('e');
+        vowel.add('i');
+        vowel.add('o');
+        vowel.add('u');
+
+        for(int i=0;i<n;i++){
+            if(vowel.contains(word.charAt(i))){
+                sum+=(i+1)*(n-i);
+            }
+        }
+        return sum;
+    }
+}
