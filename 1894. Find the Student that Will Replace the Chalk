@@ -1,0 +1,17 @@
+
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+       long chalksum=0;
+        for(int i:chalk){
+            chalksum+=i;
+        }
+        int remainingsum=(int)(k%chalksum);
+        for(int i=0;i<chalk.length;i++){
+            if(remainingsum<chalk[i]){
+                return i;
+            }
+            remainingsum-=chalk[i];
+        }
+        return -1;
+    }
+}
