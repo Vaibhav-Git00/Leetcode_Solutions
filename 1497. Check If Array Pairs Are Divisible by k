@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canArrange(int[] arr, int k) {
+        int mp[]=new int[k];
+        for(int i: arr){
+            int rem=((i%k)+k)%k;
+            mp[rem]++;
+        }
+        if(mp[0]%2!=0)return false;
+        for(int rem=1;rem<=k/2;rem++){
+            int remaining =k-rem;
+            if(mp[remaining]!=mp[rem])return false;
+        }
+        return true;
+    }
+}
