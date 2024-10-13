@@ -1,0 +1,9 @@
+class Solution {
+    public String thousandSeparator(int n) {
+        String str = Integer.toString(n);
+        for(int i=str.length()-3;i>0;i-=3){
+            str=str.substring(0,i)+"."+str.substring(i);
+        }
+        return str;
+    }
+}
