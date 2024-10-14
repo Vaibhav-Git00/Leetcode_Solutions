@@ -1,0 +1,25 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        ArrayList<Integer> aa = new ArrayList<>();
+        for(int i: nums){
+            mp.put(i,mp.getOrDefault(i,0)+1);
+        }
+        for(int i=1;i<=nums.length;i++){
+            if(mp.containsKey(i) && mp.get(i)>1){
+                aa.add(i);
+            }
+            
+        }
+        for(int i=1;i<=nums.length;i++){
+            if(!mp.containsKey(i)){
+                aa.add(i);
+            }
+        }
+        int[] result = new int[aa.size()];
+        for (int i = 0; i < aa.size(); i++) {
+            result[i] = aa.get(i);
+        }
+        return result;
+    }
+}
