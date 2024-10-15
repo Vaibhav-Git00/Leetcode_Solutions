@@ -1,0 +1,15 @@
+class Solution {
+    public int findLucky(int[] arr) {
+        HashMap<Integer,Integer> mp =new HashMap<>();
+        for(int i : arr){
+            mp.put(i,mp.getOrDefault(i,0)+1);
+        }
+        int lucky = -1;
+        for(int key : mp.keySet()){
+            if(key == mp.get(key)){
+                lucky = Math.max(lucky,key);
+            }
+        }
+        return lucky;
+    }
+}
