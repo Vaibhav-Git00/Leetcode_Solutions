@@ -26,4 +26,4 @@ class Solution {
         arr[ind1]=arr[ind2];
         arr[ind2]=temp;
     }
-}/////fjlsdjiofsajjvjfd lfksa
+}/////fjlsdjiofsajjvjfd lfksajfldjslmfl
