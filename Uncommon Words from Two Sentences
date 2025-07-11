@@ -1,0 +1,21 @@
+class Solution {
+    public String[] uncommonFromSentences(String s1, String s2) {
+        String arr[]=s1.split(" ");
+        String brr[]=s2.split(" ");
+        HashMap<String,Integer>mp=new HashMap<>();
+        for(String num:arr){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+        }
+        for(String num:brr){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+        }
+
+        ArrayList<String>ans=new ArrayList<>();
+        for(String key : mp.keySet()){
+            if(mp.get(key)==1){
+                ans.add(key);
+            }
+        }
+        return ans.toArray(new String[0]);
+    }
+}
