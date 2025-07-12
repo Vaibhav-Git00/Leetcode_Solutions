@@ -1,0 +1,32 @@
+class Solution {
+    public String sortString(String s) {
+        HashMap<Character,Integer>mp=new HashMap<>();
+        for(char ch:s.toCharArray()){
+            mp.put(ch,mp.getOrDefault(ch,0)+1);
+        }
+        StringBuilder sb=new StringBuilder();
+        int start='a';
+        int end='z';
+        while(!mp.isEmpty()){
+            for(int i=start;i<=end;i++){
+                char ch=(char)i;
+                if(mp.containsKey(ch)){
+                    sb.append(ch);
+                    mp.put(ch,mp.get(ch)-1);
+                   if(mp.get(ch)==0)mp.remove(ch);
+                }
+
+            }
+            for(int i=end;i>=start;i--){
+                char ch=(char)i;
+                if(mp.containsKey(ch)){
+                    sb.append(ch);
+                    mp.put(ch,mp.get(ch)-1);
+                    if(mp.get(ch)==0)mp.remove(ch);
+                }
+
+            }
+        }
+        return sb.toString();
+    }
+}
