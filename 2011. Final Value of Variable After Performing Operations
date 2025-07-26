@@ -1,0 +1,27 @@
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+        int sum=0;
+        String prin="X++";
+        String poin="++X";
+        String prdec="--X";
+        String podec="X--";
+        for(String s:operations){
+            if(s.equals(prin)){
+                sum=sum+1;
+            }
+            if(s.equals(poin)){
+                sum=sum+1;
+      
+            }
+            if(s.equals(prdec)){
+                sum=sum-1;
+    
+            }
+            if(s.equals(podec)){
+                sum=sum-1;
+    
+            }
+        }
+        return sum;
+    }
+}
