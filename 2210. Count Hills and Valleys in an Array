@@ -1,0 +1,21 @@
+class Solution {
+    public int countHillValley(int[] nums) {
+        ArrayList<Integer>ans=new ArrayList<>();
+        ans.add(nums[0]);
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                ans.add(nums[i]);
+            }
+        }
+        int hill=0;
+        int valley=0;
+        for(int i=1;i<ans.size()-1;i++){
+            int prev=ans.get(i-1);
+            int curr=ans.get(i);
+            int post=ans.get(i+1);
+            if(prev>curr && post>curr) hill++;
+            if(prev<curr && post<curr) valley++;
+        }
+        return hill+valley;
+    }
+}
