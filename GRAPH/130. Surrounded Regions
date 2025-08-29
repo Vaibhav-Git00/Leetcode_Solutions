@@ -1,0 +1,59 @@
+class Solution {
+    public void dfs(int r,int c,char board[][],boolean vis[][],int delrow[],int delcol[]){
+        int n=board.length;
+        int m=board[0].length;
+        vis[r][c]=true;
+
+        for(int i=0;i<4;i++){
+            int trow=r+delrow[i];
+            int tcol=c+delcol[i];
+            if(trow>=0 && trow<n && tcol>=0 && tcol<m && vis[trow][tcol]==false && board[trow][tcol]=='O'){
+                dfs(trow,tcol,board,vis,delrow,delcol);
+            }
+        }
+    }
+    public void solve(char[][] board) {
+        int n=board.length;
+        int m=board[0].length;
+        boolean vis[][]=new boolean[n][m];
+
+        int delrow[]={-1,0,1,0};
+        int delcol[]={0,1,0,-1};
+
+        // traversing the all boundaries to check if there are 'O' cells 
+        // as that cell cannot be converted to 'X'
+        // because region must surrounded by all the 'x'horzontaly and vertically
+        // so we first traverse first row then last row 
+        // then fist col and last col 
+        // after this that are connected to the boundary 'O's that must be marked true 
+        // and then we just traverse that are not marked true it means thy are surrounde by the 'X'
+        // and we can mark them 'X' and finally return the board
+
+        for(int j=0;j<m;j++){
+            if(board[0][j]=='O' && vis[0][j]==false){
+                dfs(0,j,board,vis,delrow,delcol);
+            }
+            if(board[n-1][j]=='O' && vis[n-1][j]==false){
+                dfs(n-1,j,board,vis,delrow,delcol);
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            if(board[i][0]=='O' && vis[i][0]==false){
+                dfs(i,0,board,vis,delrow,delcol);
+            }
+            if(board[i][m-1]=='O' && vis[i][m-1]==false){
+                dfs(i,m-1,board,vis,delrow,delcol);
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(board[i][j]=='O' && vis[i][j]==false){
+                    board[i][j]='X';
+                }
+            }
+        }
+        
+    }
+}
