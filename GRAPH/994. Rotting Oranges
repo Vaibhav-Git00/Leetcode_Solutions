@@ -1,0 +1,60 @@
+class Pair{
+    int row;
+    int col;
+    int time;
+    Pair(int row,int col,int time){
+        this.row=row;
+        this.col=col;
+        this.time=time;
+    }
+}
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int totalfresh=0;
+        Queue<Pair>q=new LinkedList<>();
+
+        //counting the fresh oranges and if rotten oranges then add into queue
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1)totalfresh++;
+                if(grid[i][j]==2)
+                q.add(new Pair(i,j,0));
+            }
+        }
+
+        int delrow[]={-1,0,1,0};
+        int delcol[]={0,1,0,-1};
+        int totaltimetaken=0;
+        int count=0;
+        while(!q.isEmpty()){
+            Pair node=q.poll();
+            int row=node.row;
+            int col=node.col;
+            int time=node.time;
+            
+            //jaise jaise time badhega ham usse update karte rahengee 
+            //aur jo last vala orange hoga 
+            //usko kitna time lagega woh return karooo 
+            totaltimetaken=Math.max(time,totaltimetaken);
+
+            for(int i=0;i<4;i++){
+                int nrow=row+delrow[i];
+                int ncol=col+delcol[i];
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]==1){
+                    grid[nrow][ncol]=2;
+                    count++;
+                    q.add(new Pair(nrow,ncol,time+1));
+                }
+            }
+        }
+        if(totalfresh==count){
+            return totaltimetaken;
+        }else{
+            return -1;
+        }
+
+
+    }
+}
