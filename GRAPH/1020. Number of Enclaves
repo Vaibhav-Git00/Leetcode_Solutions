@@ -1,0 +1,57 @@
+class Solution {
+    public int numEnclaves(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int temp[][]=grid;
+        boolean vis[][]=new boolean[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i==0 && grid[i][j]==1 && vis[i][j]==false){
+                    temp[i][j]=0;
+                    dfs(i,j,grid,temp,vis);
+                }
+                if(i==n-1 && grid[i][j]==1 && vis[i][j]==false){
+                    temp[i][j]=0;
+                    dfs(i,j,grid,temp,vis);
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(j==0 && grid[i][j]==1 && vis[i][j]==false){
+                   temp[i][j]=0;
+                    dfs(i,j,grid,temp,vis);
+                }
+                if(j==m-1 && grid[i][j]==1 && vis[i][j]==false){
+                    temp[i][j]=0;
+                    dfs(i,j,grid,temp,vis);
+                }
+            }
+        }
+        int count=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(vis[i][j]==false && temp[i][j]==1){
+                    count++;
+                }
+            }
+        }
+        return count;
+
+
+    }
+    public void dfs(int r,int c,int grid[][],int temp[][],boolean vis[][]){
+        int n=grid.length;
+        int m=grid[0].length;
+        vis[r][c]=true;
+        int delrow[]={-1,0,1,0};
+        int delcol[]={0,1,0,-1};
+        for(int i=0;i<4;i++){
+            int trow=r+delrow[i];
+            int tcol=c+delcol[i];
+            if(trow>=0 && trow<n && tcol>=0 && tcol<m && vis[trow][tcol]==false && grid[trow][tcol]==1){
+               dfs(trow,tcol,grid,temp,vis); 
+            }
+        }
+    }
+}

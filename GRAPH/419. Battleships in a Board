@@ -1,0 +1,31 @@
+class Solution {
+    public int countBattleships(char[][] board) {
+        int n=board.length;
+        int m=board[0].length;
+        int count =0;
+        boolean vis[][]=new boolean[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(board[i][j]=='X' && vis[i][j]==false){
+                    count++;
+                    dfs(i,j,board,vis);
+                }
+            }
+        }
+        return count;
+    }
+    public void dfs(int r,int c,char board[][],boolean vis[][]){
+        int n=board.length;
+        int m=board[0].length;
+        int delrow[]={-1,0,1,0};
+        int delcol[]={0,1,0,-1};
+        vis[r][c]=true;
+        for(int i=0;i<4;i++){
+            int trow=r+delrow[i];
+            int tcol=c+delcol[i];
+            if(trow>=0 && trow<n && tcol>=0 && tcol<m && vis[trow][tcol]==false && board[trow][tcol]=='X'){
+                dfs(trow,tcol,board,vis);
+            }
+        }
+    }
+}
