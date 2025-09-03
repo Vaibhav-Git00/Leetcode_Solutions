@@ -1,0 +1,43 @@
+class Solution {
+    public boolean dfs(int node ,int graph[][],int vis[],int pathvis[],int check[]){
+        vis[node]=1;
+        pathvis[node]=1;
+        check[node]=0;   //assume unsafe initially 
+        for(int ele:graph[node]){
+            if(vis[ele]==0){
+                if(dfs(ele,graph,vis,pathvis,check)){
+                    check[node]=0;
+                    return true; //detect cycle
+                }
+            }
+            else if(pathvis[ele]==1){
+                check[node]=0;
+                return true;   //detect cycle
+            }
+        }
+        check[node]=1;   //if no cycle detect this is a safe node
+        pathvis[node]=0;
+        return false;
+    }
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int n=graph.length;
+        int vis[]=new int[n];
+        int pathvis[]=new int[n];
+        int check[]=new int[n];
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){
+                dfs(i,graph,vis,pathvis,check);
+            }
+        }
+        ArrayList<Integer>ans=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(check[i]==1){
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
+
+
+
