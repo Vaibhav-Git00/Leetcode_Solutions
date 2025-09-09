@@ -1,0 +1,35 @@
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        StringBuilder sb=new StringBuilder();
+        int n=word1.length();
+        int m=word2.length();
+        int min=Math.min(n,m);
+        int i=0;
+        int j=0;
+        while(i<n && j<m){
+            sb.append(word1.charAt(i));
+            sb.append(word2.charAt(j));
+            i++;
+            j++;
+        }
+        int leftlen=0;
+        int a=0;
+        String newword="";
+        if(n>m){
+            leftlen=n;
+            a=i;
+            newword=word1;
+
+        }else{
+            leftlen=m;
+            a=j;
+            newword=word2;
+        }
+        while(a<leftlen){
+            sb.append(newword.charAt(a));
+            a++;
+        }
+        return sb.toString();
+
+    }
+}
