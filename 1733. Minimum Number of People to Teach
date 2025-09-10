@@ -1,0 +1,37 @@
+class Solution {
+    public int minimumTeachings(int n, int[][] languages, int[][] friendships) {
+        HashSet<Integer>badfriends=new HashSet<>();
+        for(int friends[]: friendships){
+            int u=friends[0]-1;
+            int v=friends[1]-1;
+            HashSet<Integer>mila=new HashSet<>();
+            for(int ele : languages[u]){
+                mila.add(ele);
+            }
+
+            boolean milgya=false;
+            for(int lang : languages[v]){
+                if(mila.contains(lang)){
+                    milgya=true;
+                    break;
+                }
+            }
+            if(!milgya){
+                badfriends.add(u+1);
+                badfriends.add(v+1);
+            }
+        }
+
+        int arr[]=new int[n+1];
+        int mostknownlang=0;
+        for(int user : badfriends){
+            for(int ele : languages[user]){
+                arr[ele]++;
+                mostknownlang=Math.max(mostknownlang,arr[ele]);
+            }
+        }
+        return badfriends.size()-mostknownlang;
+
+
+    }
+}
