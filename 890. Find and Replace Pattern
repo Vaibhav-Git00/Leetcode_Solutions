@@ -1,0 +1,35 @@
+class Solution {
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String>result=new ArrayList<>();
+        HashMap<Character,Integer>mp=new HashMap<>();
+        int idx=0;
+        String pp="";
+        for(char ch : pattern.toCharArray()){
+            if(!mp.containsKey(ch)){
+                mp.put(ch,idx++);
+            }
+            pp+=mp.get(ch)+",";
+        }
+        for(String word:words){
+            HashMap<Character,Integer>hp=new HashMap<>();
+            String sb="";
+            int id=0;
+            for(char ch : word.toCharArray()){
+                if(!hp.containsKey(ch)){
+                    hp.put(ch,id++);
+                }
+                sb+=hp.get(ch)+",";
+            }
+            
+            if(pp.equals(sb)){
+                result.add(word);
+            }
+        }
+        return result;
+    }
+}
+
+
+//isme ham jab frequecy ke dam par kar rhe the toh last me 1 test case fail ho raha tha but 
+//last me kuch aise test case aaye jisse ham count ke dam pe kar saktee the toh at the last yahi execute hua sath me accurate 
+//check krne ke liye "," iska use kiyeee
