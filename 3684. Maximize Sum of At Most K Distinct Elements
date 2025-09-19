@@ -1,0 +1,21 @@
+class Solution {
+    public int[] maxKDistinct(int[] nums, int k) {
+        Arrays.sort(nums);
+        int result[]=new int[k];
+        int j=0;
+        int n=nums.length;
+        result[0]=nums[n-1];
+        
+        for(int i=n-2;i>=0 && j+1<k ;i--){
+            if(result[j]!=nums[i]){
+                result[j+1]=nums[i];
+                j++;
+            }
+        }
+        int[] ans = new int[j+1];
+        for (int x = 0; x <= j; x++) {
+            ans[x] = result[x];
+        }
+        return ans;
+    }
+}
