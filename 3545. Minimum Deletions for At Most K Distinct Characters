@@ -1,0 +1,28 @@
+class Pair{
+    char ch;
+    int freq;
+    Pair(char c,int f){
+        this.ch=c;
+        this.freq=f;
+    }
+}
+class Solution {
+    public int minDeletion(String s, int k) {
+        HashMap<Character,Integer>mp =new HashMap<>();
+        for(char ch :s.toCharArray()){
+            mp.put(ch,mp.getOrDefault(ch,0)+1);
+        }
+        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->a.freq-b.freq);
+        for(char key:mp.keySet()){
+            pq.add(new Pair(key,mp.get(key)));
+        }
+        int len=pq.size()-k;
+        int ans=0;
+        for(int i=0;i<len;i++){
+            Pair p=pq.poll();
+            int min=p.freq;
+            ans+=min;
+        }
+        return ans;
+    }
+}
