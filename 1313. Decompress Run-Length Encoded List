@@ -1,0 +1,18 @@
+class Solution {
+    public int[] decompressRLElist(int[] nums) {
+        int totallen=0;
+        for(int i=0;i<nums.length;i+=2){
+            totallen+=nums[i];
+        }
+        int result[]=new int[totallen];
+        int j=0;
+        for(int i=0;i<nums.length;i+=2){
+            int freq=nums[i];
+            int value=nums[i+1];
+            for(int k=0;k<freq;k++){
+                result[j++]=value;
+            }
+        }
+        return result;
+    }
+}
