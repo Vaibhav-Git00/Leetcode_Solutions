@@ -1,0 +1,33 @@
+class Solution {
+    public int[] decimalRepresentation(int n) {
+        int count=0;
+        int temp=n;
+        while(temp>0){
+            temp/=10;
+            count++;
+        }
+
+        temp=n;
+        int nonzero=0;
+        for(int i=count-1;i>=0;i--){
+            int d=(int)Math.pow(10,i);
+            int digit=temp/d;
+            if(digit!=0)nonzero++;
+            temp%=d;
+        }
+        int result[]=new int[nonzero];
+        int j=0;
+        temp=n;
+        for(int i=count-1;i>=0;i--){
+            int d=(int)Math.pow(10,i);
+            int digit=temp/d;
+            if(digit!=0){
+                result[j++]=digit*d;
+            }
+            temp%=d;
+        }
+        return result;
+        
+        
+    }
+}

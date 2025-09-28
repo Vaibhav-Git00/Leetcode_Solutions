@@ -1,0 +1,50 @@
+class Solution {
+    public long splitArray(int[] nums) {
+        int n=nums.length;
+        boolean right[]=new boolean[n];
+        boolean left[]=new boolean[n];
+        left[0]=true;
+        int max=nums[0];
+        for(int i=1;i<n;i++){
+            if(nums[i]>max){
+                left[i]=true;
+                 max=Math.max(max,nums[i]);
+            }
+            else{
+                break;
+            }
+        }
+        right[n-1]=true;
+        int mx=nums[n-1];
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]>mx){
+                right[i]=true;
+                mx=Math.max(mx,nums[i]);
+            }
+            else{
+                break;
+            }
+        }
+        long prefix[]=new long[n];
+        prefix[0]=nums[0];
+        for(int i=1;i<n;i++){
+            prefix[i]=prefix[i-1]+nums[i];
+        }
+
+        long suffix[]=new long[n];
+        suffix[n-1]=nums[n-1];
+        for(int i=n-2;i>=0;i--){
+            suffix[i]=suffix[i+1]+nums[i];
+        }
+
+        int a=0;
+        long ans=Long.MAX_VALUE;
+        while(a<n-1){
+            if(left[a]&& right[a+1]){
+                ans=Math.min(ans,Math.abs(prefix[a]-suffix[a+1]));
+            }
+            a++;
+        }
+        return (ans==Long.MAX_VALUE)?-1:ans;
+    }
+}
