@@ -1,0 +1,16 @@
+class Solution {
+    public int largestPerimeter(int[] nums) {
+        Arrays.sort(nums);
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length-2;i++){
+            int a=nums[i];
+            int b=nums[i+1];
+            int c=nums[i+2];
+            if(a+b>c){
+                int sum=a+b+c;
+                max=Math.max(max,sum);
+            }
+        }
+        return (max<0)?0:max;
+    }
+}
