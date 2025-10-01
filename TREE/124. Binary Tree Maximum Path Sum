@@ -1,0 +1,15 @@
+class Solution {
+    public int findpath(TreeNode root,int diag[]){
+        if(root==null)return 0;
+        int lh=Math.max(0,findpath(root.left,diag));
+        int rh=Math.max(0,findpath(root.right,diag));
+        diag[0]=Math.max(diag[0],lh+rh+root.val);  
+        return Math.max(lh,rh)+root.val;
+    }
+    public int maxPathSum(TreeNode root) {
+        int diag[]=new int[1];
+        diag[0]=Integer.MIN_VALUE;
+        findpath(root,diag);
+        return diag[0];
+    }
+}
