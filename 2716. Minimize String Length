@@ -1,0 +1,15 @@
+class Solution {
+    public int minimizedStringLength(String s) {
+        HashMap<Character,Integer>mp=new HashMap<>();
+        for(char ch : s.toCharArray()){
+            mp.put(ch,mp.getOrDefault(ch,0)+1);
+        }
+        int count=0;
+        for(char ch :mp.keySet()){
+            if(mp.get(ch)>1){
+                count+=mp.get(ch)-1;
+            }
+        }
+        return s.length()-count;
+    }
+}
