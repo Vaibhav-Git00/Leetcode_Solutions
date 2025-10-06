@@ -1,0 +1,29 @@
+class Solution {
+    public int[] nextgreater(int arr[]){
+        int result[]=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            result[i]=-1;
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[j]>arr[i]){
+                    result[i]=arr[j];
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        int next[]=nextgreater(nums2);
+        int i=0;
+        for(int num:nums2){
+            mp.put(num,next[i++]);
+        }
+        int finalans[]=new int[nums1.length];
+        int j=0;
+        for(int num : nums1){
+            finalans[j++]=mp.get(num);
+        }
+        return finalans;
+    }
+}
