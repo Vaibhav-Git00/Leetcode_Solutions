@@ -1,0 +1,39 @@
+class Solution {
+    boolean isleaf(Node root){
+        return (root.left==null && root.right==null);
+    }
+    void leftnode(Node root,ArrayList<Integer>list){
+        Node curr=root.left;
+        while(curr!=null){
+            if(!isleaf(curr))list.add(curr.data);
+            if(curr.left!=null)curr=curr.left;
+            else curr=curr.right;
+        }
+    }
+    void leafnode(Node root,ArrayList<Integer>list){
+        if(root==null)return;
+        if(isleaf(root))list.add(root.data);
+        leafnode(root.left,list);
+        leafnode(root.right,list);
+    }
+    void rightnode(Node root,ArrayList<Integer>list){
+        Node curr=root.right;
+        Stack<Integer>st=new Stack<>();
+        while(curr!=null){
+            if(!isleaf(curr))st.push(curr.data);
+            if(curr.right!=null)curr=curr.right;
+            else curr=curr.left;
+        }
+        while(!st.isEmpty())list.add(st.pop());
+    }
+    ArrayList<Integer> boundaryTraversal(Node root) {
+        ArrayList<Integer>list=new ArrayList<>();
+        if(!isleaf(root))list.add(root.data);
+        leftnode(root,list);
+        leafnode(root,list);
+        rightnode(root,list);
+        return list;
+        
+        
+    }
+}
