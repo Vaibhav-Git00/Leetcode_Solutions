@@ -1,0 +1,26 @@
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        Queue<TreeNode>q=new LinkedList<>();
+        if(root==null)return new ArrayList<>();
+        q.add(root);
+        List<List<Integer>>result=new ArrayList<>();
+        while(!q.isEmpty()){
+            int n=q.size();
+            ArrayList<Integer>sublist=new ArrayList<>();
+            for(int i=0;i<n;i++){
+                if(q.peek().left!=null)q.add(q.peek().left);
+                if(q.peek().right!=null)q.add(q.peek().right);
+                sublist.add(q.poll().val);
+            }
+            result.add(sublist);
+        }
+
+        ArrayList<Integer>ans=new ArrayList<>();
+        for(int i=0;i<result.size();i++){
+            List<Integer>pp=result.get(i);
+            ans.add(pp.get(pp.size()-1));
+        }
+        return ans;
+    }
+}
+
