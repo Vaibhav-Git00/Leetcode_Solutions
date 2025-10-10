@@ -1,0 +1,22 @@
+class Solution {
+    public static void solve(Node root,ArrayList<ArrayList<Integer>>result,ArrayList<Integer>list){
+        if(root==null)return;
+        list.add(root.data);
+        if(root.left==null && root.right==null){
+            result.add(new ArrayList<>(list));
+        }
+        solve(root.left,result,list);
+        solve(root.right,result,list);
+        list.remove(list.size()-1);
+        
+    }
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        ArrayList<ArrayList<Integer>>result=new ArrayList<>();
+        solve(root,result,new ArrayList<>());
+        return result;
+        
+    }
+}
+
+
+//inorder traversal krwaya hai bas sath me arraylist lekar and dfs use hua hai 

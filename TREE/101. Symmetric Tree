@@ -1,4 +1,3 @@
-
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         return (root==null || issymm(root.left,root.right));

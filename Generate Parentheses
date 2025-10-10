@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isvalid(String s){
+        int count=0;
+        for(char ch : s.toCharArray()){
+            if(ch=='('){
+                count++;
+            }else{
+                count--;
+            }
+            if(count<0)return false;
+        }
+        return (count==0);
+    }
+    public List<String> generateParenthesis(int n) {
+        List<String>result=new ArrayList<>();
+        String curr="";
+        generate(curr,0,n,result);
+        return result;
+    }
+    public void generate(String curr,int length,int n,List<String>result){
+        if(length==2*n){
+            if(isvalid(curr)){
+                result.add(curr);
+            }
+            return;
+        }
+        curr+='(';
+        generate(curr,length+1,n,result);
+        curr=curr.substring(0,curr.length()-1);
+
+        curr+=')';
+        generate(curr,length+1,n,result);
+    }
+}
