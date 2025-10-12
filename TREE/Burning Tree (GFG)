@@ -1,0 +1,73 @@
+class Solution {
+    public Node findNode(Node root,int value){
+            if(root==null)return null;
+            Queue<Node>q=new LinkedList<>();
+            q.add(root);
+            while(!q.isEmpty()){
+                Node curr=q.poll();
+                if(curr.data==value){
+                    return curr;
+                }
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                }
+            }
+            return null;
+    }
+    
+    public void parentrack(Node root,HashMap<Node ,Node >mp){
+        Queue<Node>q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            Node current=q.poll();
+            if(current.left!=null){
+                q.add(current.left);
+                mp.put(current.left,current);
+            }
+            if(current.right!=null){
+                q.add(current.right);
+                mp.put(current.right,current);
+            }
+        }
+    }
+    public int minTime(Node root, int target) {
+        HashMap<Node,Node>mp=new HashMap<>();
+        parentrack(root,mp);
+        Node newtarget=findNode(root,target);
+        
+        HashMap<Node,Boolean>vis=new HashMap<>();
+        Queue<Node>q=new LinkedList<>();
+        q.add(newtarget);
+        vis.put(newtarget,true);
+        
+        int sec=-1;
+        while(!q.isEmpty()){
+            sec++;
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                Node current=q.poll();
+                if(current.left!=null && vis.get(current.left)==null){
+                    q.add(current.left);
+                    vis.put(current.left,true);
+                }
+                if(current.right!=null && vis.get(current.right)==null){
+                    q.add(current.right);
+                    vis.put(current.right,true);
+                }
+                if(mp.get(current)!=null && vis.get(mp.get(current))==null){
+                    q.add(mp.get(current));
+                    vis.put(mp.get(current),true);
+                }
+                
+            }
+        }
+        return sec;
+        
+    }
+}
+
+//Ye same to same 863 distance k ki tarah hai bas isme time batana hai 
+//parent wala intutiion lag raha hai bas 
