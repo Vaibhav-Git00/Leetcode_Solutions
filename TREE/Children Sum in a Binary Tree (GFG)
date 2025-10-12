@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isSumProperty(Node root) {
+        //  code here
+        if(root==null)return true;
+        Queue<Node>q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            
+            int n=q.size();
+            Node roo=q.poll();
+            if (roo.left == null && roo.right == null)continue;
+            
+            int pastsum=roo.data;
+            
+            int presentsum=0;
+            
+            if(roo.left!=null){
+                q.add(roo.left);
+                presentsum+=roo.left.data;
+            }
+            if(roo.right!=null){
+                q.add(roo.right);
+                presentsum+=roo.right.data;
+            }
+            if(presentsum!=pastsum)return false;
+        }
+        return true;
+    }
+}
+
+//Leaf node ko exist nahi kare hai apne intution ke andar kyuki kyuki leaf node se phle hi woh node check ho ja raha hai 
