@@ -1,0 +1,26 @@
+class Solution {
+    public int search(int inorder[],int left,int right,int val){
+        int result=0;
+        for(int i=left;i<=right;i++){
+            if(inorder[i]==val){
+                result=i;
+            }
+        }
+        return result;
+    }
+    public TreeNode maketree(int preorder[],int inorder[],int pi[],int left,int right){
+        if(left>right)return null;
+        TreeNode root=new TreeNode (preorder[pi[0]]);
+        pi[0]++;
+        int inindex=search(inorder,left,right,root.val);
+        root.left=maketree(preorder,inorder,pi,left,inindex-1);
+        root.right=maketree(preorder,inorder,pi,inindex+1,right);
+        return root;
+    }
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int arr[]={0};
+        TreeNode li=maketree(preorder,inorder,arr,0,inorder.length-1);
+        return li;
+        
+    }
+}
