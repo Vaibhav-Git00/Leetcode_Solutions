@@ -1,0 +1,34 @@
+
+class Solution {
+    public boolean isanagrams(String s,String t){
+        if(s.length()!=t.length())return false;
+        HashMap<Character,Integer>mp1=new HashMap<>();
+        for(char ch : s.toCharArray()){
+            mp1.put(ch,mp1.getOrDefault(ch,0)+1);
+        }
+        HashMap<Character,Integer>mp2=new HashMap<>();
+        for(char ch : t.toCharArray()){
+            mp2.put(ch,mp2.getOrDefault(ch,0)+1);
+        }
+        for(char ch : t.toCharArray()){
+            int val1=(mp1.get(ch)!=null)?mp1.get(ch):0;
+            int val2=(mp2.get(ch)!=null)?mp2.get(ch):0;
+            if(val1!=val2)return false;
+        }
+        return true;
+    }
+    public List<String> removeAnagrams(String[] words) {
+        List<String>result=new ArrayList<>();
+        for(int i=0;i<words.length;i++){
+            result.add(words[i]);
+        }
+
+        for(int i=1;i<result.size();i++){
+            if(isanagrams(result.get(i-1),result.get(i))){
+                result.remove(i);
+                i--;
+            }
+        }
+        return result;
+    }
+}
