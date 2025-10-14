@@ -1,0 +1,30 @@
+class Solution {
+
+    public boolean checkgreater(int arr[]) {
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] >= arr[i]) return false;
+        }
+        return true;
+    }
+
+    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+        int n = nums.size();
+
+        for (int i = 0; i + 2 * k <= n; i++) {
+            int first[] = new int[k];
+            int second[] = new int[k];
+
+            for (int j = 0; j < k; j++) {
+                first[j] = nums.get(i + j);
+            }
+            for (int j = 0; j < k; j++) {
+                second[j] = nums.get(i + k + j);
+            }
+            if (checkgreater(first) && checkgreater(second)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
