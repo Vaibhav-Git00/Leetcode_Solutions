@@ -1,0 +1,31 @@
+class Solution {
+    public boolean ifalldigit(String s){
+        for(char ch : s.toCharArray()){
+            if(!Character.isDigit(ch))return false;
+        }
+        return true;
+    }
+    public boolean ifcontainsdigit(String s){
+        for(char ch : s.toCharArray()){
+            if(Character.isDigit(ch))return true;
+        }
+        return false;
+    }
+    
+    public int maximumValue(String[] strs) {
+        int maxvalue=0;
+        for(String s : strs){
+            int max=0;
+            if(ifalldigit(s)){
+                int num=Integer.parseInt(s);
+                max=Math.max(max,num);
+            }else if(ifcontainsdigit(s)){
+                max=Math.max(max,s.length());
+            }else{
+                max=Math.max(max,s.length());
+            }
+            maxvalue=Math.max(maxvalue,max);
+        }
+        return maxvalue;
+    }
+}
