@@ -1,0 +1,20 @@
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        for(int num : nums){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+        }
+        int ans[]=new int[2];
+        int j=0;
+        for(int key:mp.keySet()){
+            if(mp.get(key)>=2){
+                ans[j]=key;
+                j++;
+            }
+            if(j==2){
+                break;
+            }
+        }
+        return ans;
+    }
+}
