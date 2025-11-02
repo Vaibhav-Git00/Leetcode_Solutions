@@ -1,0 +1,17 @@
+class Solution {
+    public void dfs(Node root,int k,int largest[],int counter[]){
+        if(root==null)return;
+        dfs(root.right,k,largest,counter);
+        counter[0]++;
+        if(counter[0]==k){
+            largest[0]=root.data;
+        }
+        dfs(root.left,k,largest,counter);
+    }
+    public int kthLargest(Node root, int k) {
+        int largest[]=new int[1];
+        int counter[]=new int[1];
+        dfs(root,k,largest,counter);
+        return largest[0];
+    }
+}
