@@ -1,0 +1,18 @@
+class Solution {
+    public void inorder(TreeNode root,ArrayList<Integer>li){
+        if(root==null)return;
+        inorder(root.left,li);
+        li.add(root.val);
+        inorder(root.right,li);
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        ArrayList<Integer>li=new ArrayList<>();
+        inorder(root,li);
+        for(int i=1;i<li.size();i++){
+            if(li.get(i-1)>=li.get(i))return false;
+        }
+        return true;
+
+    }
+}
