@@ -1,0 +1,17 @@
+class Solution {
+    public void dfs(TreeNode root,int k ,int smallest[],int counter[]){
+        if(root==null)return;
+        dfs(root.left,k,smallest,counter);
+        counter[0]++;
+        if(counter[0]==k){
+            smallest[0]=root.val;
+        }
+        dfs(root.right,k,smallest,counter);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        int smallest[]=new int[1];
+        int counter[]=new int[1];
+        dfs(root,k,smallest,counter);
+        return smallest[0];
+    }
+}
