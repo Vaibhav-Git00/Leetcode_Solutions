@@ -1,0 +1,21 @@
+class Solution {
+    public int findSecondMinimumValue(TreeNode root) {
+        if(root==null)return -1;
+        Queue<TreeNode>q=new LinkedList<>();
+        q.add(root);
+        int min=root.val;
+        long smin=Long.MAX_VALUE;
+        while(!q.isEmpty()){
+            
+                TreeNode curr=q.poll();
+                if(curr.val>min && curr.val<smin){
+                    smin=curr.val;
+                }
+                if(curr.left!=null)q.add(curr.left);
+                if(curr.right!=null)q.add(curr.right);
+            
+        }
+        return (smin!=Long.MAX_VALUE)?(int)smin:-1;
+
+    }
+}
