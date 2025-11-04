@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isHeap(Node tree) {
+        // code here
+        if(tree==null)return true;
+        Queue<Node>q=new LinkedList<>();
+        q.add(tree);
+        boolean flag=false;
+        while(!q.isEmpty()){
+                Node curr=q.poll();
+                if(curr.left!=null){
+                    if(flag==true)return false;
+                    if(curr.left.data>curr.data)return false;
+                    q.add(curr.left);
+                }else{
+                    flag=true;
+                }
+                if(curr.right!=null){
+                    if(flag==true)return false;
+                    if(curr.right.data>curr.data)return false;
+                    q.add(curr.right);
+                }else{
+                    flag=true;
+                }
+        }
+        return true;
+    }
+}
