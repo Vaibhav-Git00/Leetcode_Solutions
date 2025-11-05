@@ -1,0 +1,43 @@
+class Solution {
+    public int findCeil(Node root, int x) {
+        // code here
+        int ceil=-1;
+        while(root!=null){
+            if(root.data<=x){
+                root=root.right;
+            }else{
+                ceil=root.data;
+                root=root.left;
+            }
+        }
+        return ceil;
+    }
+    public  int floor(Node root, int x) {
+        int ceil=-1;
+        while(root!=null){
+            if(root.data>=x){
+                root=root.left;
+            }
+            else{
+                ceil=root.data;
+                root=root.right;
+            }
+        }
+        return ceil;
+        
+    }
+    public ArrayList<Node> findPreSuc(Node root, int key) {
+        ArrayList<Node>li=new ArrayList<>();
+        Node t1=new Node(floor(root,key));
+        Node t2=new Node(findCeil(root,key));
+        Node n=null;
+        if(t1!=null){
+            li.add(t1);
+        }else{
+            li.add(n);
+        }
+        if(t2!=null)li.add(t2);
+        else li.add(n);
+        return li;
+    }
+}
