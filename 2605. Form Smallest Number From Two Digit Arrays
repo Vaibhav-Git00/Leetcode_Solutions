@@ -1,0 +1,31 @@
+class Solution {
+    public int minNumber(int[] nums1, int[] nums2) {
+        HashSet<Integer>st=new HashSet<>();
+        int min1=Integer.MAX_VALUE;
+        for(int num:nums2){
+            st.add(num);
+            min1=Math.min(num,min1);
+        }
+        String s="";
+        int min2=Integer.MAX_VALUE;
+        int minimum=Integer.MAX_VALUE;
+        for(int num : nums1){
+            if(st.contains(num)){
+                minimum=Math.min(minimum,num);
+            }
+            min2=Math.min(min2,num);
+        }
+        if(minimum!=Integer.MAX_VALUE){
+            return minimum;
+        }
+        if(min2<min1){
+            s+=String.valueOf(min2);
+            s+=String.valueOf(min1);
+        }else{
+            s+=String.valueOf(min1);
+            s+=String.valueOf(min2);
+        }
+        int result=Integer.parseInt(s);
+        return result;
+    }
+}
