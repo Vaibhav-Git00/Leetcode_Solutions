@@ -7,11 +7,12 @@ class Solution {
         if(root==null)return;
         inorder(root.left);
         if(prev!=null && root.val<prev.val){
+            //1st voilation
             if(first==null){
                 first=prev;
                 middle=root;
             }else{
-                last=root;
+                last=root;   //2nd voilation
             }
         }
         prev=root;
