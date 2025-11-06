@@ -1,0 +1,35 @@
+class Solution {
+    public boolean check(int weights[],int days,int target){
+        int day=1;
+        int currsum=0;
+        for(int i=0;i<weights.length;i++){
+            currsum+=weights[i];
+            if(currsum>target){
+                day++;
+                currsum=weights[i];
+            }
+        }
+        return (day<=days)?true:false;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        int right=0;
+        int left=Integer.MIN_VALUE;
+        for(int num : weights){
+            right+=num;
+            left=Math.max(left,num);
+        }
+        int ans=right;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(check(weights,days,mid)){
+                ans=mid;
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+            
+        }
+        return ans;
+
+    }
+}
