@@ -1,0 +1,36 @@
+class Cashier {
+    public HashMap<Integer,Integer>mp=new HashMap<>();
+    public int count=0;
+    public int disc=0;
+    int num=0;
+    public Cashier(int n, int discount, int[] products, int[] prices) {
+        for(int i=0;i<products.length;i++){
+            mp.put(products[i],prices[i]);
+        }
+        disc=discount;
+        num=n;
+    }
+    
+    public double getBill(int[] product, int[] amount) {
+        double result=0;
+        double ans=0;
+        HashMap<Integer,Integer>freq=new HashMap<>();
+        for(int i=0;i<product.length;i++){
+            freq.put(product[i],amount[i]);
+        }
+        for(int i=0;i<product.length;i++){
+            int pidamount=mp.get(product[i]);
+            int quantity=freq.get(product[i]);
+            result+=pidamount*quantity;
+        }
+        count++;
+        if(count%num==0)result = result - (result * disc / 100.0);
+        return result; 
+    }
+}
+
+/**
+ * Your Cashier object will be instantiated and called as such:
+ * Cashier obj = new Cashier(n, discount, products, prices);
+ * double param_1 = obj.getBill(product,amount);
+ */

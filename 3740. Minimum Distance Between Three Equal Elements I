@@ -1,0 +1,33 @@
+class Solution {
+    public int minimumDistance(int[] nums) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        HashMap<Integer,ArrayList<Integer>>freq=new HashMap<>();
+        HashSet<Integer>st=new HashSet<>();
+        
+        for(int i=0;i<nums.length;i++){
+            mp.put(nums[i],mp.getOrDefault(nums[i],0)+1);
+            st.add(nums[i]);
+            if (!freq.containsKey(nums[i])) {
+                freq.put(nums[i], new ArrayList<>());
+            }
+            freq.get(nums[i]).add(i);
+        }
+
+        
+        int min=Integer.MAX_VALUE;
+        for(int key : st){
+            if(mp.get(key)>=3){
+                ArrayList<Integer>ans=freq.get(key);
+                for(int x=0;x<=ans.size()-3;x++){
+                    int i=ans.get(x);
+                    int j=ans.get(x+1);
+                    int k=ans.get(x+2);
+                    int val=Math.abs(i-j)+Math.abs(j-k)+Math.abs(k-i);
+                    min=Math.min(min,val);
+                }
+            }
+        }
+        return (min!=Integer.MAX_VALUE)?min:-1;
+        
+    }
+}
