@@ -1,0 +1,43 @@
+class Tuple{
+    TreeNode node;
+    int vertical;
+    int level;
+    Tuple(TreeNode n,int v,int l){
+        this.node=n;
+        this.vertical=v;
+        this.level=l;
+    }
+}
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>>result=new ArrayList<>();
+        if(root==null)return result;
+        TreeMap<Integer,TreeMap<Integer,ArrayList<Integer>>>mp=new TreeMap<>();
+        Queue<Tuple>q=new LinkedList<>();
+        q.add(new Tuple(root,0,0));
+        while(!q.isEmpty()){
+            Tuple p=q.poll();
+            TreeNode curr=p.node;
+            int vert=p.vertical;
+            int lev=p.level;
+            if(!mp.containsKey(vert)){
+                mp.put(vert,new TreeMap<>());
+            }
+            if(!mp.get(vert).containsKey(lev)){
+                mp.get(vert).put(lev,new ArrayList<Integer>());
+            }
+            mp.get(vert).get(lev).add(curr.val);
+            if(curr.left!=null)q.add(new Tuple(curr.left,vert-1,lev+1));
+            if(curr.right!=null)q.add(new Tuple(curr.right,vert+1,lev+1));
+        }
+        for(TreeMap<Integer,ArrayList<Integer>>entry:mp.values()){
+            result.add(new ArrayList<>());
+            for(ArrayList<Integer>ans:entry.values()){
+                Collections.sort(ans);
+                result.get(result.size()-1).addAll(ans);
+            }
+        }
+        
+        return result;
+    }
+}
