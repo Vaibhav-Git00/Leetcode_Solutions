@@ -1,0 +1,81 @@
+class Solution {
+    public int node;
+    public int edgecount;
+
+    public int countCompleteComponents(int n, int[][] edges) {
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<n;i++)adj.add(new ArrayList<>());
+        for(int edge[]:edges){
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+        int count=0;
+        boolean vis[]=new boolean[n];
+        for(int i=0;i<n;i++){
+            if(vis[i]==false){
+                node=0;
+                edgecount=0;
+                bfs(i,vis,adj);
+                if(edgecount/2==node*(node-1)/2)count++;
+            }
+        }
+        return count;
+    }
+    public void bfs(int n,boolean vis[],ArrayList<ArrayList<Integer>>adj){
+        Queue<Integer>q=new LinkedList<>();
+        q.add(n);
+        vis[n]=true;
+        while(!q.isEmpty()){
+            int de=q.poll();
+            node++;
+            for(int ele:adj.get(de)){
+                edgecount++;
+                if(vis[ele]==false){
+                    vis[ele]=true;
+                    q.add(ele);
+                }
+            }
+        }
+    }
+}
+
+
+
+//this is dfs version 
+
+
+class Solution {
+    public int node;
+    public int edgecount;
+
+    public int countCompleteComponents(int n, int[][] edges) {
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<n;i++)adj.add(new ArrayList<>());
+        for(int edge[]:edges){
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+        int count=0;
+        boolean vis[]=new boolean[n];
+        for(int i=0;i<n;i++){
+            if(vis[i]==false){
+                node=0;
+                edgecount=0;
+                dfs(i,vis,adj);
+                if(edgecount/2==node*(node-1)/2)count++;
+            }
+        }
+        return count;
+    }
+    public void dfs(int n,boolean vis[],ArrayList<ArrayList<Integer>>adj){
+        vis[n]=true;
+        node++;
+        for(int ele : adj.get(n)){
+            edgecount++;
+            if(vis[ele]==false){
+                dfs(ele,vis,adj);
+                
+            }
+        }
+    }
+}
