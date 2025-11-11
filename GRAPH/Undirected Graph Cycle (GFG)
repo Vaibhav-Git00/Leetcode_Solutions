@@ -1,0 +1,48 @@
+class Pair{
+    int node;
+    int parent;
+    Pair(int n,int p){
+        this.node=n;
+        this.parent=p;
+    }
+}
+class Solution {
+    public boolean isCycle(int V, int[][] edges) {
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<V;i++)adj.add(new ArrayList<>());
+        for(int edge[]:edges){
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+        boolean vis[]=new boolean[V];
+        for(int i=0;i<V;i++){
+            if(vis[i]==false){
+                if(bfs(i,vis,adj))return true;
+            }
+        }
+        return false;
+    }
+    public boolean bfs(int n,boolean vis[],ArrayList<ArrayList<Integer>>adj){
+        Queue<Pair>q=new LinkedList<>();
+        q.add(new Pair(n,-1));
+        vis[n]=true;
+        while(!q.isEmpty()){
+            Pair p=q.poll();
+            int nodee=p.node;
+            int parentt=p.parent;
+            for(int ele : adj.get(nodee)){
+                if(vis[ele]==false){
+                    vis[ele]=true;
+                    q.add(new Pair(ele,nodee));
+                }else if(parentt!=ele){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+
+//ek chiz bas dhyan rakho jab bfs use kar rhe jab visited already ho tab else if me ek condition aur check karnii hai ki parent is not eqaul adj node hua toh true krna hoga ,kyuki waha se new path aa raha hai 
+//ab iss chiz ko ratana hi sahi hai and agar samjhana hai tab tree bana lo adj list ke sath try karo bfs pata lag jayega kyu ye codition implement ho rahi hai 
