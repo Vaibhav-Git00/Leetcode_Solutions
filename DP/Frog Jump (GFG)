@@ -1,0 +1,27 @@
+//KYuki frog ek ya do jump le sakta hai and first stairs (0) se last stairs(n-1) me jana hai 
+// and frog ko nth tak jane me min cost lagna chahiye and the cost will be jis index se kudenge agle index ke liye ,dono index ke elemnt subtract abs se karne ke baad jo ayega woh hamara cost hoga and mujhe last tak jane me iss tarah total min cost nikalni hai 
+//dekho dp ka question ham piche se karte hai (top-bottom) approach
+//toh jana hame n-1 se 0 tak hai 
+//toh phle case toh shi hai jab one step le rahe hai 
+//jab dusra step lenge toh ham check karlenge ki idx>1 element aage present bhi hai ki nahi agar hoga tohii second step lengee and tabhi hamne waha edge case lagyaa hai 
+//base case hamara ki 0 index me jane ke baad toh lenge hi nhi koi bhi step kyuki ham already destination me pahuch chuke hai 
+
+class Solution {
+    int minCost(int[] height) {
+        int n=height.length;
+        int dp[]=new int[n+1];
+        Arrays.fill(dp,-1);
+        return solve(n-1,height,dp);
+    }
+    public int solve(int ind,int height[],int dp[]){
+        if(ind==0)return 0;
+        if(dp[ind]!=-1)return dp[ind];
+        int one=solve(ind-1,height,dp)+Math.abs(height[ind]-height[ind-1]);
+        int two = Integer.MAX_VALUE;
+        if(ind>1){
+            two=solve(ind-2,height,dp)+Math.abs(height[ind]-height[ind-2]);
+        }
+
+        return dp[ind]=Math.min(one,two);
+    }
+}

@@ -1,0 +1,18 @@
+//jab ek ko select kar raha toh usko sum kareg and jab nhi select kr raha toh age wale ke liye call kardega 
+//kyuki ek conditioin given hai ki ek bhi adjacent element nhi le sakte hai aap 
+class Solution {
+    int findMaxSum(int arr[]) {
+        int n=arr.length;
+        int dp[]=new int [n+1];
+        Arrays.fill(dp,-1);
+        return solve(n-1,arr,dp);
+    }
+    int solve(int idx,int arr[],int dp[]){
+        if(idx==0)return arr[0];
+        if(idx<0)return 0;
+        if(dp[idx]!=-1)return dp[idx];
+        int pick=arr[idx]+solve(idx-2,arr,dp);
+        int notpick=solve(idx-1,arr,dp);
+        return dp[idx]=Math.max(pick,notpick);
+    }
+}
