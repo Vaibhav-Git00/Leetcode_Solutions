@@ -1,0 +1,23 @@
+class Solution {
+    public int minSteps(String s, String t) {
+        HashMap<Character,Integer>mp1=new HashMap<>();
+        for(char ch:s.toCharArray()){
+            mp1.put(ch,mp1.getOrDefault(ch,0)+1);
+        }
+        HashMap<Character,Integer>mp2=new HashMap<>();
+        for(char ch :t.toCharArray()){
+            mp2.put(ch,mp2.getOrDefault(ch,0)+1);
+        }
+        int count=0;
+        for(char ch : mp2.keySet()){
+            if(mp1.get(ch)!=null){
+                if(mp2.get(ch)>mp1.get(ch)){
+                    count+=(mp2.get(ch)-mp1.get(ch));
+                }
+            }else{
+                count+=mp2.get(ch);
+            }
+        }
+        return count;
+    }
+}
