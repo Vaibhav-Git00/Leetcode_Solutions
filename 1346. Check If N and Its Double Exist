@@ -1,0 +1,15 @@
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        HashSet<Integer>st=new HashSet<>();
+        int zeroCount=0;
+        for(int num : arr){
+            st.add(num);
+            if(num == 0) zeroCount++;
+        }
+        if(zeroCount>1)return true;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]!=0 && arr[i]%2==0 &&  st.contains(arr[i]/2))return true;
+        }
+        return false;
+    }
+}
