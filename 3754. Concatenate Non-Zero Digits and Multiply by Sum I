@@ -1,0 +1,18 @@
+class Solution {
+    public long sumAndMultiply(int n) {
+        StringBuilder sb = new StringBuilder();
+        String s = String.valueOf(n);
+        long sum = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '0') {
+                sb.append(s.charAt(i));
+                long nn = Long.parseLong(String.valueOf(s.charAt(i)));
+                sum += nn;
+            }
+        }
+        if (sb.length() == 0) return 0; 
+        long x = Long.parseLong(sb.toString());
+        return x * sum;
+    }
+}
