@@ -1,0 +1,35 @@
+class Solution {
+    public String reverseWords(String s) {
+       String[] str = s.split(" "); 
+        int len=str.length;
+        int vowelcount=0;
+        String firstt=str[0];
+        for(char ch : firstt.toCharArray()){
+            if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')vowelcount++;
+        }
+        StringBuilder sb=new StringBuilder();
+        sb.append(str[0]);
+        sb.append(" ");
+        for(int i=1;i<len;i++){
+            String st=str[i];
+            int count=countvowel(st);
+            if(count==vowelcount){
+                StringBuilder sb1 = new StringBuilder(st);
+                sb1.reverse();
+                sb.append(sb1).append(" ");
+            }else{
+                sb.append(st).append(" ");
+            }
+            
+        }
+        return sb.toString().trim();
+
+    }
+    public int countvowel(String s){
+        int count=0;
+        for(char ch : s.toCharArray()){
+            if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')count++;
+        }
+        return count;
+    }
+}
