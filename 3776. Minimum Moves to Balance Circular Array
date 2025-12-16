@@ -1,0 +1,32 @@
+class Solution {
+    public long minMoves(int[] balance) {
+        long sum=0;
+        int neg=-1;
+        for(int i=0;i<balance.length;i++){
+            sum+=balance[i];
+            if(balance[i]<0)neg=i;
+        }
+        if(sum<0)return -1;
+        if(neg==-1)return 0;
+
+        long move=0;
+        int need=-balance[neg];
+        int n=balance.length;
+        for(int d=1;d<n;d++){
+            int left=(neg-d+n)%n;
+            int right=(neg+d)%n;
+
+            if(balance[left]>0){
+                long take=Math.min(balance[left],need);
+                move+=take*d;
+                need-=take;
+            }
+            if(need>0 && balance[right]>0 && right!=left){
+                long take=Math.min(balance[right],need);
+                move+=take*d;
+                need-=take;
+            }
+        }
+        return move;
+    }
+}
