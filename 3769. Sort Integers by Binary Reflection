@@ -1,0 +1,35 @@
+class Solution {
+    public int solve(int n){
+        String bin="";
+        while(n>0){
+            bin=(n%2)+bin;
+            n/=2;
+        }
+        StringBuilder sb=new StringBuilder(bin);
+        sb.reverse();
+        String s=sb.toString();
+        int dec=0;
+        for(int i=0;i<s.length();i++){
+            dec=dec*2+(s.charAt(i)-'0');
+        }
+        return dec;
+        
+    }
+    public int[] sortByReflection(int[] nums) {
+        int n=nums.length;
+        int arr[][]=new int[n][2];
+        for(int i=0;i<n;i++){
+            arr[i][0]=solve(nums[i]);
+            arr[i][1]=nums[i];
+        }
+        Arrays.sort(arr,(a,b)->{
+            if(a[0]==b[0])return a[1]-b[1];
+            return a[0]-b[0];
+        });
+        int ans[]=new int[n];
+        for(int i=0;i<n;i++){
+            ans[i]=arr[i][1];
+        }
+        return ans;
+    }
+}
