@@ -1,0 +1,40 @@
+class Solution {
+    public boolean increasing(int arr[]){
+        boolean flag=true;
+        for(int i=0;i<arr.length-1;i++){
+            if(arr[i]>arr[i+1]){
+                flag=false;
+                break;
+            }
+        }
+        return flag;
+    }
+ 
+    public int minDeletionSize(String[] strs) {
+        int n=strs.length;
+        int m=strs[0].length();
+        int mat[][]=new int[n][m];
+        for(int i=0;i<n;i++){
+            String s=strs[i];
+
+            for(int j=0;j<m;j++){
+                mat[i][j]=s.charAt(j)-'a';
+            }
+        }
+        int trans[][] = new int[m][n];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                trans[j][i] = mat[i][j];   
+            }
+        }
+        int count=0;
+        for(int col = 0; col < m; col++){
+            int ans[]=new int[n];
+            for(int row = 0; row < n; row++){
+                ans[row]=trans[col][row];
+            }
+            if(increasing(ans)==false)count++;
+        }
+        return count;
+    }
+}
