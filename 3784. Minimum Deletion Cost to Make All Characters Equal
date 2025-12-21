@@ -1,0 +1,31 @@
+class Pair{
+    long cost;
+    int idx;
+    Pair(long c,int i){
+        this.cost=c;
+        this.idx=i;
+    }
+}
+class Solution {
+    public long minCost(String s, int[] cost) {
+        long totalcost=0;
+        for(int c:cost){
+            totalcost+=c;
+        }
+        HashMap<Character,Long>mp=new HashMap<>();
+        for(int i=0;i<cost.length;i++){
+            char ch =s.charAt(i);
+            mp.put(ch,mp.getOrDefault(ch,0L)+cost[i]);
+        }
+
+        ArrayList<Pair>li=new ArrayList<>();
+        int i=0;
+        for(long value:mp.values()){
+            li.add(new Pair(value,i++));
+        }
+        if(li.size()==1)return 0;
+        li.sort((a,b)->Long.compare(a.cost, b.cost));
+        long keepcost=li.get(li.size()-1).cost;
+        return totalcost-keepcost;
+    }
+}
