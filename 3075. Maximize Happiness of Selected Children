@@ -1,0 +1,27 @@
+class Solution {
+    public long maximumHappinessSum(int[] happiness, int k) {
+        Arrays.sort(happiness);
+        int n=happiness.length;
+        int dec[]=new int[n];
+        int j=0;
+        for(int i=n-1;i>=0;i--){
+            dec[j++]=happiness[i];
+        }
+        long sum=dec[0];
+        k=k-1;
+        int drr=1;
+        for(int i=1;i<n;i++){
+            if(k==0)break;
+            int val=dec[i]-drr;
+            if(val<0){
+                val=0;
+                sum+=val;
+            }else{
+                sum+=val;
+            }
+            drr++;
+            k--;
+        }
+        return sum;
+    }
+}
