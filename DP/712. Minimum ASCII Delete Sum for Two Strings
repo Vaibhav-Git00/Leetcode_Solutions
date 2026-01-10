@@ -1,0 +1,28 @@
+class Solution {
+    public int minimumDeleteSum(String s1, String s2) {
+        int n=s1.length();
+        int m=s2.length();
+        int dp[][]=new int[n+1][m+1];
+        for(int row[]:dp)Arrays.fill(row,-1);
+        int ascii=solve(n-1,m-1,0,0,s1,s2,dp);
+        int sum1 = 0;
+        int sum2 = 0;
+        for (char c : s1.toCharArray()){
+            sum1 += c;
+        } 
+        for (char c : s2.toCharArray()){
+             sum2 += c;
+        }
+        return (sum1+sum2)-(2*ascii);
+    }
+    public int solve(int i,int j,int n,int m,String s1,String s2,int dp[][]){
+        if(i<0 || j<0)return 0;
+        if(dp[i][j]!=-1)return dp[i][j];
+        if(s1.charAt(i)==s2.charAt(j)){
+         
+            return dp[i][j]=s1.charAt(i)+solve(i-1,j-1,n,m,s1,s2,dp);
+        }else{
+            return dp[i][j]=Math.max(solve(i,j-1,n,m,s1,s2,dp),solve(i-1,j,n,m,s1,s2,dp));
+        }
+    }
+}
