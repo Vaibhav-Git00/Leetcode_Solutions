@@ -1,0 +1,56 @@
+class Pair{
+    int node;
+    int weight;
+    Pair(int n,int w){
+        this.node=n;
+        this.weight=w;
+    }
+}
+class Solution {
+    public long minimumCost(String source, String target, char[] original, char[] changed, int[] cost) {
+        ArrayList<ArrayList<Pair>>adj=new ArrayList<>();
+        for(int i=0;i<26;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<original.length;i++){
+            int u=original[i]-'a';
+            int v=changed[i]-'a';
+            adj.get(u).add(new Pair(v,cost[i]));
+        }
+        int dist[][]=new int[26][26];
+        int inf=(int)1e9;
+        for(int i=0;i<26;i++){
+            dist[i]=dijstra(i,adj,inf);
+        }
+        long ans=0;
+        for(int i=0;i<source.length();i++){
+            int s=source.charAt(i)-'a';
+            int t=target.charAt(i)-'a';
+            if(s==t)continue;
+            if(dist[s][t]==inf)return -1;
+            ans+=dist[s][t];
+        }
+        return ans;
+    }
+    public int[] dijstra(int src,ArrayList<ArrayList<Pair>>adj,int inf){
+        int list[]=new int[26];
+        Arrays.fill(list,inf);
+        list[src]=0;
+        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->a.weight-b.weight);
+        pq.add(new Pair(src,0));
+        while(!pq.isEmpty()){
+            Pair p=pq.poll();
+            int u=p.node;
+            int v=p.weight;
+            for(Pair t:adj.get(u)){
+                int adjnode=t.node;
+                int adjweight=t.weight;
+                if(list[u]+adjweight<list[adjnode]){
+                    list[adjnode]=list[u]+adjweight;
+                    pq.add(new Pair(adjnode,list[adjnode]));
+                }
+            }
+        }
+        return list;
+    }
+}
