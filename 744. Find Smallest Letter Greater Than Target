@@ -1,0 +1,12 @@
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+
+        char res='{';
+        for(char ch :letters){
+            if(ch>target && ch<res){
+                res=ch;
+            }
+        }
+        return (res=='{')?letters[0]:res;
+    }
+}
