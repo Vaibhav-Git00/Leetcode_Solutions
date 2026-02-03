@@ -1,0 +1,25 @@
+class Solution {
+    public int maximumCandies(int[] candies, long k) {
+        int low=1;
+        int max=candies[0];
+        for(int num : candies){
+            max=Math.max(num,max);
+        }
+        int high=max;
+        int ans=0;
+        while(low<=high){
+            int mid=(low+high)/2;
+            long child=0;
+            for(int a : candies){
+                child+=a/mid;
+            }
+            if(child>=k){
+                ans=mid;
+                low=mid+1;
+            }else {
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+}
