@@ -1,0 +1,40 @@
+class Solution {
+    public boolean check(int nums[],int mid,int m,int k){
+        int count=0;
+        int bouquet=0;
+        for(int a:nums){
+            if(a<=mid){
+                count++;
+                if(count==k){
+                    bouquet++;
+                    count=0;
+                }
+            }else{
+                count=0;
+            }
+        }
+        return bouquet>=m;
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        for(int num : bloomDay){
+            min=Math.min(min,num);
+            max=Math.max(max,num);
+        }
+        int low=min;
+        int high=max;
+        int ans=-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(check(bloomDay,mid,m,k)){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
