@@ -1,0 +1,16 @@
+class Solution {
+    public int prefixConnected(String[] words, int k) {
+        HashMap<String,Integer>mp=new HashMap<>();
+        for(String s:words){
+            if(s.length()>=k){
+                String ww=s.substring(0,k);
+                mp.put(ww,mp.getOrDefault(ww,0)+1);
+            }
+        }
+        int count=0;
+        for(String ss:mp.keySet()){
+            if(mp.get(ss)>=2)count++;
+        }
+        return count;
+    }
+}
