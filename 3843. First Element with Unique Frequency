@@ -1,0 +1,17 @@
+class Solution {
+    public int firstUniqueFreq(int[] nums) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        for(int num : nums){
+            mp.put(num,mp.getOrDefault(num,0)+1);
+        }
+        HashMap<Integer,Integer>dup=new HashMap<>();
+        for(int key : mp.keySet()){
+            dup.put(mp.get(key),dup.getOrDefault(mp.get(key),0)+1);
+        }
+        for(int num :nums){
+            int f=mp.get(num);
+            if(dup.get(f)==1)return num;
+        }
+        return -1;
+    }
+}
