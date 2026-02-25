@@ -1,0 +1,31 @@
+class Solution {
+    public int count(String s ){
+        int count=0;
+        for(char c : s.toCharArray()){
+            if(c=='1')count++;
+        }
+        return count;
+    }
+    public int[] sortByBits(int[] arr) {
+        TreeMap<Integer,ArrayList<Integer>>mp=new TreeMap<>();
+        for(int a : arr){
+            String s=Integer.toBinaryString(a);
+            int counting=count(s);
+            if(!mp.containsKey(counting)){
+                mp.put(counting,new ArrayList<>());
+            }
+            mp.get(counting).add(a);
+        }
+
+        int ans[]=new int[arr.length];
+        int j=0;
+        for(int key : mp.keySet()){
+            ArrayList<Integer>temp=mp.get(key);
+            Collections.sort(temp);
+            for(int i=0;i<temp.size();i++){
+                ans[j++]=temp.get(i);
+            }
+        }
+        return ans;
+    }
+}
