@@ -1,0 +1,30 @@
+class Solution {
+    public String getHappyString(int n, int k) {
+        List<String>li=new ArrayList<>();
+        solve(li,n,"");
+        Collections.sort(li);
+        return (k>li.size())?"":li.get(k-1);
+    }
+    public void solve(List<String>li,int n,String s){
+        if(s.length()==n){
+            li.add(s);
+            return ;
+        }
+        if(s.length()==0 || s.charAt(s.length()-1)!='a'){
+            solve(li,n,s+'a');
+        }
+        if(s.length()==0 || s.charAt(s.length()-1)!='b'){
+            solve(li,n,s+'b');
+        }
+        if(s.length()==0|| s.charAt(s.length()-1)!='c'){
+            solve(li,n,s+'c');
+        }
+    }
+
+}
+
+
+
+
+
+
