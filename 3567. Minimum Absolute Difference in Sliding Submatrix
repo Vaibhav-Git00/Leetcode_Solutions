@@ -1,0 +1,33 @@
+class Solution {
+    public int[][] minAbsDiff(int[][] grid, int k) {
+        int n = grid.length;
+        int m = grid[0].length;
+        
+        int result[][] = new int[n - k + 1][m - k + 1];
+
+        for (int i = 0; i <= n - k; i++) {
+            for (int p = 0; p <= m - k; p++) {
+
+                HashSet<Integer> st = new HashSet<>();
+
+                for (int x = i; x < i + k; x++) {
+                    for (int j = p; j < p + k; j++) {
+                        st.add(grid[x][j]);
+                    }
+                }
+
+                ArrayList<Integer> arr = new ArrayList<>(st);
+                Collections.sort(arr);
+
+                int min = Integer.MAX_VALUE;
+
+                for (int d = 1; d < arr.size(); d++) {
+                    min = Math.min(min, arr.get(d) - arr.get(d - 1));
+                }
+
+                result[i][p] = (arr.size() > 1) ? min : 0;
+            }
+        }
+        return result;
+    }
+}
