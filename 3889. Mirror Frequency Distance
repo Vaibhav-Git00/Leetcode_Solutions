@@ -1,0 +1,54 @@
+class Solution {
+    public boolean ischar(char ch){
+        if(ch>='a' && ch<='z')return true;
+        else return false;
+    }
+    public int mirrorFrequency(String s) {
+        HashMap<Character,Integer>mp1=new HashMap<>();
+        HashMap<Character,Integer>mp2=new HashMap<>();
+
+        for(char ch : s.toCharArray()){
+            if(ischar(ch)){
+                int digi =ch-'a';
+                char newch=(char) ('z'-digi);
+                if(!mp1.containsKey(ch) && !mp2.containsKey(ch)){
+                    mp1.put(ch,0);
+                    mp2.put(newch,0);
+                }
+            }else{
+                int digi=ch-'0';
+                char newch=(char) ('9'-digi);
+                if(!mp1.containsKey(ch) && !mp2.containsKey(ch)){
+                    mp1.put(ch,0);
+                    mp2.put(newch,0);
+                }
+            }
+        }
+
+
+        for(char ch : s.toCharArray()){
+            if(mp1.containsKey(ch))mp1.put(ch,mp1.get(ch)+1);
+            if(mp2.containsKey(ch))mp2.put(ch,mp2.get(ch)+1);
+        }
+        int totalsum=0;
+        for (Map.Entry<Character, Integer> entry : mp1.entrySet()) {
+            char key = entry.getKey();
+            int val1 = entry.getValue();
+            int val2=0;
+            if(ischar(key)){
+                int digi=key-'a';
+                char newch=(char)('z'-digi);
+                val2=mp2.get(newch);
+            }else{
+                int digi=key-'0';
+                char newch=(char) ('9'-digi);
+                val2=mp2.get(newch);
+            }
+            int absolutevalue=Math.abs(val1-val2);
+            totalsum+=absolutevalue;
+        }
+        return totalsum;
+
+
+    }
+}
